@@ -22,9 +22,9 @@ LOCAL_PATH := $(call my-dir)
 #----------------------------------------------------------------------
 ifeq ($(KERNEL_DEFCONFIG),)
 ifeq ($(TARGET_BUILD_VARIANT),eng)
-    KERNEL_DEFCONFIG := cancro_debug_defconfig
+    KERNEL_DEFCONFIG := cyanogen_cancro_defconfig
 else
-    KERNEL_DEFCONFIG := cancro_user_defconfig
+    KERNEL_DEFCONFIG := cyanogen_cancro_defconfig
 endif
 endif
 
@@ -36,9 +36,7 @@ $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 #----------------------------------------------------------------------
 # extra images
 #----------------------------------------------------------------------
-ifeq (, $(wildcard vendor/qcom/build/tasks/generate_extra_images.mk))
-include device/qcom/common/generate_extra_images.mk
-endif
+include build/core/generate_extra_images.mk
 
 # include the non-open-source counterpart to this file
 -include vendor/xiaomi/cancro/AndroidBoardVendor.mk

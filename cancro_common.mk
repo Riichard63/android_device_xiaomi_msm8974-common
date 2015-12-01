@@ -57,4 +57,3 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, $(LOCAL_PATH)/common.mk)
-$(call inherit-product, vendor/xiaomi/cancro/cancro-vendor.mk)

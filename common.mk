@@ -29,6 +29,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.compass.xml \
@@ -47,9 +48,52 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.print.xml:system/etc/permissions/android.software.print.xml
 
 
+# MIDI feature
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
+
 # Charger
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/chargeonlymode:root/sbin/chargeonlymode
+
+$(call inherit-product, device/qcom/common/Android.mk)
+
+# CM Hardware Abstraction Framework
+PRODUCT_PACKAGES += \
+    org.cyanogenmod.hardware \
+    org.cyanogenmod.hardware.xml
+
+
+
+# Ramdisk
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    init.qcom.rc \
+    init.target.rc \
+    init.qcom.usb.rc \
+    ueventd.qcom.rc \
+    init.class_main.sh \
+    init.mdm.sh \
+    init.qcom.class_core.sh \
+    init.qcom.early_boot.sh \
+    init.qcom.factory.sh \
+    init.qcom.sh \
+    init.qcom.ssr.sh \
+    init.qcom.syspart_fixup.sh \
+    init.qcom.usb.sh \
+    libinit_cancro
+
+# QCOM Config Script
+PRODUCT_PACKAGES += \
+    hsic.control.bt.sh \
+    init.qcom.bt.sh \
+    init.qcom.fm.sh \
+    init.qcom.modem_links.sh \
+    init.qcom.post_boot.sh \
+    init.qcom.wifi.sh \
+    qca6234-service.sh \
+    usf_post_boot.sh
+
 
 # Init
 PRODUCT_COPY_FILES += \
@@ -68,44 +112,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/init.target.rc:root/init.target.rc \
     $(LOCAL_PATH)/rootdir/root/ueventd.qcom.rc:root/ueventd.qcom.rc
 
+
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/rootdir/system/etc/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
     $(LOCAL_PATH)/rootdir/system/etc/listen_platform_info.xml:system/etc/listen_platform_info.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_3_1.xml:system/etc/mixer_paths_3_1.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_3_1_forte.xml:system/etc/mixer_paths_3_1_forte.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_3_2.xml:system/etc/mixer_paths_3_2.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_3_2_forte.xml:system/etc/mixer_paths_3_2_forte.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_4_x.xml:system/etc/mixer_paths_4_x.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_4_x_forte.xml:system/etc/mixer_paths_4_x_forte.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_5_x.xml:system/etc/mixer_paths_5_x.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_5_x_forte.xml:system/etc/mixer_paths_5_x_forte.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_auxpcm_3_1.xml:system/etc/mixer_paths_auxpcm_3_1.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_auxpcm_3_2.xml:system/etc/mixer_paths_auxpcm_3_2.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_auxpcm_4_x.xml:system/etc/mixer_paths_auxpcm_4_x.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths_auxpcm_5_x.xml:system/etc/mixer_paths_auxpcm_5_x.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X3/MTP_X3_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/X3/MTP_X3_Bluetooth_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X3/MTP_X3_General_cal.acdb:system/etc/acdbdata/MTP/X3/MTP_X3_General_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X3/MTP_X3_Global_cal.acdb:system/etc/acdbdata/MTP/X3/MTP_X3_Global_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X3/MTP_X3_Handset_cal.acdb:system/etc/acdbdata/MTP/X3/MTP_X3_Handset_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X3/MTP_X3_Hdmi_cal.acdb:system/etc/acdbdata/MTP/X3/MTP_X3_Hdmi_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X3/MTP_X3_Headset_cal.acdb:system/etc/acdbdata/MTP/X3/MTP_X3_Headset_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X3/MTP_X3_Speaker_cal.acdb:system/etc/acdbdata/MTP/X3/MTP_X3_Speaker_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X4/MTP_X4_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/X4/MTP_X4_Bluetooth_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X4/MTP_X4_General_cal.acdb:system/etc/acdbdata/MTP/X4/MTP_X4_General_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X4/MTP_X4_Global_cal.acdb:system/etc/acdbdata/MTP/X4/MTP_X4_Global_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X4/MTP_X4_Handset_cal.acdb:system/etc/acdbdata/MTP/X4/MTP_X4_Handset_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X4/MTP_X4_Hdmi_cal.acdb:system/etc/acdbdata/MTP/X4/MTP_X4_Hdmi_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X4/MTP_X4_Headset_cal.acdb:system/etc/acdbdata/MTP/X4/MTP_X4_Headset_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X4/MTP_X4_Speaker_cal.acdb:system/etc/acdbdata/MTP/X4/MTP_X4_Speaker_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X5/MTP_X5_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/X5/MTP_X5_Bluetooth_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X5/MTP_X5_General_cal.acdb:system/etc/acdbdata/MTP/X5/MTP_X5_General_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X5/MTP_X5_Global_cal.acdb:system/etc/acdbdata/MTP/X5/MTP_X5_Global_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X5/MTP_X5_Handset_cal.acdb:system/etc/acdbdata/MTP/X5/MTP_X5_Handset_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X5/MTP_X5_Hdmi_cal.acdb:system/etc/acdbdata/MTP/X5/MTP_X5_Hdmi_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X5/MTP_X5_Headset_cal.acdb:system/etc/acdbdata/MTP/X5/MTP_X5_Headset_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/X5/MTP_X5_Speaker_cal.acdb:system/etc/acdbdata/MTP/X5/MTP_X5_Speaker_cal.acdb
 
 # GPS
 PRODUCT_COPY_FILES += \
@@ -120,16 +132,20 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/rootdir/system/etc/wifi/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
-    $(LOCAL_PATH)/rootdir/system/etc/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
-    $(LOCAL_PATH)/rootdir/system/etc/wifi/WCNSS_qcom_wlan_nv_x4.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_x4.bin \
-    $(LOCAL_PATH)/rootdir/system/etc/wifi/WCNSS_qcom_wlan_nv_x4lte.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_x4lte.bin \
-    $(LOCAL_PATH)/rootdir/system/etc/wifi/WCNSS_qcom_wlan_nv_x5.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_x5.bin \
-    $(LOCAL_PATH)/rootdir/system/etc/wifi/WCNSS_qcom_wlan_nv_x5gbl.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_x5gbl.bin \
     $(LOCAL_PATH)/rootdir/system/etc/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
     $(LOCAL_PATH)/rootdir/system/etc/wifi/hostapd.deny:system/etc/hostapd/hostapd.deny \
     $(LOCAL_PATH)/rootdir/system/etc/wifi/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
     $(LOCAL_PATH)/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+
+
+# data
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/data/dsi_config.xml:system/etc/data/dsi_config.xml \
+    $(LOCAL_PATH)/configs/data/netmgr_config.xml:system/etc/data/netmgr_config.xml \
+    $(LOCAL_PATH)/configs/data/qmi_config.xml:system/etc/data/qmi_config.xml
+
+
 
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
@@ -157,18 +173,21 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
+# GPS
+ PRODUCT_PACKAGES += \
+     gps.msm8974
+
 # Media profile
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/configs/media_codecs_performance_8974.xml:system/etc/media_codecs_performance.xml
 
 #skip boot jars check if QCPATH not available
-ifeq ($(strip $(QCPATH)),)
 SKIP_BOOT_JARS_CHECK := true
-endif
 
 # Thermal config
 PRODUCT_COPY_FILES += \
@@ -249,7 +268,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libxml2
 
-PRODUCT_PACKAGES += camera.msm8974
+PRODUCT_PACKAGES += \
+    camera.msm8974  \
+    libcancro_camera \
+    libboringssl-compat
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -264,6 +286,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libdivxdrmdecrypt \
+    libextmedia_jni \
     libdashplayer \
     libOmxAacEnc \
     libOmxAmrEnc \
@@ -273,10 +296,12 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVdecHevc \
     libOmxVenc \
+    libOmxVidcCommon \
     libstagefrighthw \
-    qcmediaplayer
+    qcmediaplayer\
+    libqcmediaplayer \
+    libextmedia_jni
 
-PRODUCT_BOOT_JARS += qcmediaplayer
 
 # Keystore
 PRODUCT_PACKAGES += \
@@ -316,7 +341,9 @@ PRODUCT_PACKAGES += \
     Stk \
     busybox \
     CellBroadcastReceiver \
-    Updater
+    Updater \
+    messaging \
+    SnapdragonCamera
 
 PRODUCT_PACKAGES += \
     AudioFX
@@ -324,6 +351,7 @@ PRODUCT_PACKAGES += \
 # CodeAurora
 PRODUCT_PACKAGES += \
     org.codeaurora.Performance \
+    org.codeaurora.camera \
     BluetoothExt \
     javax.btobex \
     libattrib_static \
@@ -333,10 +361,15 @@ PRODUCT_PACKAGES += \
     liballjoyn \
     libtinyxml \
     libtinyxml2 \
-    tcmiface
+    tcmiface \
+    rmnetcli \
+    librmnetctl \
+    datatop \
+    sockev \
+    libexsurfaceflinger
 
 PRODUCT_BOOT_JARS += \
-    org.codeaurora.Performance \
+    qcmediaplayer \
     tcmiface
 
 # QCOM
@@ -375,6 +408,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=1024
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapstartsize=16m \
+    dalvik.vm.heapgrowthlimit=192m \
+    dalvik.vm.heapsize=512m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=2m \
+    dalvik.vm.heapmaxfree=8m \
+    
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
@@ -404,8 +445,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.buffer.size.kb=32 \
     av.offload.enable=true \
+    audio.offload.video=true \
     audio.offload.gapless.enabled=false \
-    audio.offload.disable=1 \
+    audio.offload.disable=0 \
     use.voice.path.for.pcm.voip=true
 
 # Enable AAC 5.1 output
@@ -443,7 +485,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # OpenGL ES 3.0
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196608
+    ro.opengles.version=196609
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -456,7 +498,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ril.subscription.types=RUIM \
     persist.omh.enabled=true \
-    persist.sys.ssr.restart_level=3
+    persist.sys.ssr.restart_level=3 \
+    persist.radio.custom_ecc=1 \
+    ro.telephony.default_cdma_sub=0 \
 
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -480,10 +524,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.gamut_mode=0
 
 # call dalvik heap config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
 # call hwui memory config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # This is the aries-specific audio package
 $(call inherit-product, frameworks/base/data/sounds/AudioPackage10.mk)

@@ -170,9 +170,7 @@
     <bool name="config_enableFusedLocationOverlay" translatable="false">false</bool>
     <string name="config_fusedLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
 
-    <!-- Component name of the geofence services provider. -->
-    <string name="config_geofenceServicesProvider" translatable="false">com.qualcomm.location</string>
-
+    
     <!-- Component name of the combo network location provider. -->
     <string name="config_comboNetworkLocationProvider" translatable="false">com.qualcomm.location</string>
 
@@ -233,14 +231,8 @@
          on the headphone/microphone jack. When false use the older uevent framework. -->
     <bool name="config_useDevInputEventForAudioJack">true</bool>
 
-    <!-- Boolean indicating if RADIO POWER OFF should be skipped on receiving SIM REFRESH with RESET-->
-    <!-- This will be handled by modem if it is true-->
-    <bool translatable="false" name="skip_radio_power_off_on_sim_refresh_reset">true</bool>
-
-    <!-- Configuration to restart radio upon PDP_DEACTIVATE with
-         error cause as Regular deactivation(36). -->
-    <bool name="config_radio_reset_on_regular_deactivation">false</bool>
-
+    
+    
     <!-- MMS user agent string -->
     <string name="config_mms_user_agent" translatable="false">Android-Mms/2.0</string>
 
@@ -248,12 +240,6 @@
     <string name="config_mms_user_agent_profile_url" translatable="false"
             >http://www.google.com/oha/rdf/ua-profile-kila.xml</string>
 
-    <!-- Configuration to sending and receiving Mms when mobile data is disable.-->
-    <bool name="config_enable_mms_with_mobile_data_off">true</bool>
-
-    <!-- Configuartion to support 7bit Ascii encoding and decoding
-         for long messages. -->
-    <bool name="config_ascii_7bit_support_for_long_message">true</bool>
 
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
@@ -298,6 +284,13 @@
     <!-- Default color for notification LED is blue. -->
     <color name="config_defaultNotificationColor">#0000FF</color>
 
-    <!-- Configuartion to set zen mode when silent mode is on -->
-    <bool name="config_setZenModeWhenSilentModeOn">true</bool>
+    <!-- Doze mode -->
+    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    <integer name="config_screenBrightnessDoze">5</integer>
+    <bool name="config_dozeAfterScreenOff">true</bool>
+    <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
+    
+    <!-- enable doze powersaving mode -->
+    <bool name="config_enableAutoPowerModes">true</bool>
+
 </resources>

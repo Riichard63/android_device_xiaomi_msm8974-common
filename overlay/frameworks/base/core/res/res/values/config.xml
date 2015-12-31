@@ -170,9 +170,6 @@
     <bool name="config_enableFusedLocationOverlay" translatable="false">false</bool>
     <string name="config_fusedLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
 
-    
-    <!-- Component name of the combo network location provider. -->
-    <string name="config_comboNetworkLocationProvider" translatable="false">com.qualcomm.location</string>
 
     <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
          on the headphone/microphone jack. When false use the older uevent framework. -->
@@ -225,7 +222,7 @@
     <integer name="config_virtualKeyQuietTimeMillis">100</integer>
 
     <!-- reference volume index for music stream to limit headphone volume and display warning -->
-    <integer name="config_safe_media_volume_index">6</integer>
+    <integer name="config_safe_media_volume_index">7</integer>
 
     <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
          on the headphone/microphone jack. When false use the older uevent framework. -->
@@ -254,18 +251,21 @@
          rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
          If no value is found for the rat-name in use, the system default will be applied.
     -->
-    <string-array name="config_mobile_tcp_buffers">
+
+   <string-array name="config_mobile_tcp_buffers">
         <item>"lte:2097152,4194304,8388608,262144,524288,1048576"</item>
+        <item>"lte_ca:2097152,4194304,8388608,262144,524288,1048576"</item>
         <item>"umts:4094,87380,1220608,4096,16384,1220608"</item>
         <item>"hspa:4094,87380,1220608,4096,16384,1220608"</item>
         <item>"hsupa:4094,87380,1220608,4096,16384,1220608"</item>
-        <item>"hsdpa:4094,87380,1220608,4096,16384,1220608"</item>
+        <item>"hsdpa:4094,87380,2441216,4096,16384,2441216"</item>
         <item>"hspap:4094,87380,1220608,4096,16384,1220608"</item>
         <item>"edge:4093,26280,35040,4096,16384,35040"</item>
         <item>"gprs:4092,8760,11680,4096,8760,11680"</item>
-        <item>"evdo:4094,87380,524288,4096,16384,262144"</item>
+        <item>"evdo:4094,87380,1048576,4096,16384,262144"</item>
+        <item>"ehrpd:4094,87380,1048576,4096,16384,262144"</item>
     </string-array>
-
+ 
     <!-- Flag indicating if the speed up audio on mt call code should be executed -->
     <bool name="config_speed_up_audio_on_mt_calls">true</bool>
 
@@ -284,11 +284,8 @@
     <!-- Default color for notification LED is blue. -->
     <color name="config_defaultNotificationColor">#0000FF</color>
 
-    <!-- Doze mode -->
-    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
-    <integer name="config_screenBrightnessDoze">5</integer>
-    <bool name="config_dozeAfterScreenOff">true</bool>
-    <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
+    <!-- Flag indicating emergency calls will always use IMS irrespective of the state of the IMS connection -->
+    <bool name="useImsAlwaysForEmergencyCall">false</bool>
     
     <!-- enable doze powersaving mode -->
     <bool name="config_enableAutoPowerModes">true</bool>

@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-ifneq ($(filter cancro,$(TARGET_DEVICE)),)
+ifneq ($(filter cancro virgo,$(TARGET_DEVICE)),)
 
 LOC_PATH := $(call my-dir)
 

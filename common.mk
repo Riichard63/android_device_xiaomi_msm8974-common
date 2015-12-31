@@ -56,7 +56,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/chargeonlymode:root/sbin/chargeonlymode
 
-$(call inherit-product, device/qcom/common/Android.mk)
 
 # CM Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
@@ -65,34 +64,8 @@ PRODUCT_PACKAGES += \
 
 
 
-# Ramdisk
 PRODUCT_PACKAGES += \
-    fstab.qcom \
-    init.qcom.rc \
-    init.target.rc \
-    init.qcom.usb.rc \
-    ueventd.qcom.rc \
-    init.class_main.sh \
-    init.mdm.sh \
-    init.qcom.class_core.sh \
-    init.qcom.early_boot.sh \
-    init.qcom.factory.sh \
-    init.qcom.sh \
-    init.qcom.ssr.sh \
-    init.qcom.syspart_fixup.sh \
-    init.qcom.usb.sh \
     libinit_cancro
-
-# QCOM Config Script
-PRODUCT_PACKAGES += \
-    hsic.control.bt.sh \
-    init.qcom.bt.sh \
-    init.qcom.fm.sh \
-    init.qcom.modem_links.sh \
-    init.qcom.post_boot.sh \
-    init.qcom.wifi.sh \
-    qca6234-service.sh \
-    usf_post_boot.sh
 
 
 # Init
@@ -124,7 +97,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf \
     $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
-    $(LOCAL_PATH)/gps/lowi.conf:system/etc/lowi.conf \
     $(LOCAL_PATH)/gps/quipc.conf:system/etc/quipc.conf \
     $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf
 
@@ -191,8 +163,6 @@ SKIP_BOOT_JARS_CHECK := true
 
 # Thermal config
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermald-8974.conf:system/etc/thermald-8974.conf \
-    $(LOCAL_PATH)/configs/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf \
     $(LOCAL_PATH)/configs/thermal-engine-perf.conf:system/etc/thermal-engine-perf.conf
 
 PRODUCT_COPY_FILES += \
@@ -249,7 +219,7 @@ PRODUCT_PACKAGES += \
     mount.exfat \
     fsck.exfat \
     mkfs.exfat \
-    mkfs.f2fs \
+    make.f2fs \
     fsck.f2fs \
     fibmap.f2fs \
     ntfsfix \
@@ -259,7 +229,12 @@ PRODUCT_PACKAGES += \
     resize2fs \
     e2fsck_static \
     mke2fs_static \
-    resize2fs_static
+    resize2fs_static \
+    mkfs.f2fs \
+    libntfs-3g \
+    mount.ntfs \
+    make_ntfs \
+    mkfs.ntfs
 
 # Extra tools
 PRODUCT_PACKAGES += \
@@ -269,9 +244,7 @@ PRODUCT_PACKAGES += \
     libxml2
 
 PRODUCT_PACKAGES += \
-    camera.msm8974  \
-    libcancro_camera \
-    libboringssl-compat
+    camera.msm8974
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -307,9 +280,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     keystore.qcom
 
-# USB
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
 
 # Misc dependency packages
 PRODUCT_PACKAGES += \
@@ -339,11 +309,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Launcher3 \
     Stk \
-    busybox \
+    toybox \
     CellBroadcastReceiver \
     Updater \
     messaging \
-    SnapdragonCamera
+    SnapdragonCamera \
+    ExactCalculator
 
 PRODUCT_PACKAGES += \
     AudioFX
@@ -366,7 +337,8 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     datatop \
     sockev \
-    libexsurfaceflinger
+    libexsurfaceflinger \
+    ConnectivityExt
 
 PRODUCT_BOOT_JARS += \
     qcmediaplayer \
@@ -382,15 +354,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.hfp.client=1 \
     ro.bluetooth.alwaysbleon=true
 
-PRODUCT_CHARACTERISTICS := nosdcard
-
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
-# set USB OTG enabled to add support for USB storage type
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.isUsbOtgEnabled=1
 
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -409,6 +372,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_height=1024
 
 PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-flags=--no-watch-dog \
+    dalvik.vm.dex2oat-swap=false
+
+
+PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapstartsize=16m \
     dalvik.vm.heapgrowthlimit=192m \
     dalvik.vm.heapsize=512m \
@@ -420,9 +388,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
     persist.loc.nlp_name=com.qualcomm.services.location \
-    ro.gps.agps_provider=1 \
-    ro.qc.sdk.izat.premium_enabled=1 \
-    ro.qc.sdk.izat.service_mask=0x5
+    ro.gps.agps_provider=1
 
 # PowerModel
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -500,7 +466,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.omh.enabled=true \
     persist.sys.ssr.restart_level=3 \
     persist.radio.custom_ecc=1 \
-    ro.telephony.default_cdma_sub=0 \
+    ro.telephony.default_cdma_sub=0
 
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -512,16 +478,22 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.wfd.virtual=0
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    camera2.portability.force_api=1
+    camera2.portability.force_api=1 \
+    persist.camera.4k2k.enable=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.stagefright.use-awesome=true \
     debug.mdpcomp.4k2kSplit=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.data.qmi.adb_logmask=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.ltm_enable=true \
     assertdisplay.value=128 \
     persist.sys.gamut_mode=0
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.fuse_sdcard=true
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)

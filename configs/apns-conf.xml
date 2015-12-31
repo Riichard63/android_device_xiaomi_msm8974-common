@@ -18380,6 +18380,62 @@
         user="ctwap@mycdma.cn"
     />
 
+  <apn carrier="中国联通连接互联网"
+      mcc="460"
+      mnc="09"
+      apn="3gnet"
+      type="default,supl"
+  />
+
+  <apn carrier="中国联通手机上网"
+      mcc="460"
+      mnc="09"
+      apn="3gwap"
+      proxy="10.0.0.172"
+      port="80"
+      server="http://www.wo.com.cn"
+      type="default"
+  />
+
+  <apn carrier="中国联通彩信"
+      mcc="460"
+      mnc="09"
+      apn="3gwap"
+      mmsc="http://mmsc.myuni.com.cn"
+      mmsproxy="10.0.0.172"
+      mmsport="80"
+      type="mms"
+  />
+
+    <apn carrier="中国移动CMNET"
+        mcc="460"
+        mnc="08"
+        apn="cmnet"
+        type="default,supl"
+    />	11357
+
+    <apn carrier="中国移动CMWAP"
+        mcc="460"
+        mnc="08"
+        apn="cmwap"
+        proxy="10.0.0.172"
+        port="80"
+        server="http://wap.monternet.com"
+        type="default"
+    />
+
+    <apn carrier="中国移动彩信"
+        mcc="460"
+        mnc="08"
+        apn="cmwap"
+        proxy="10.0.0.172"
+        port="80"
+        mmsc="http://mmsc.monternet.com"
+        mmsproxy="10.0.0.172"
+        mmsport="80"
+        type="mms"
+    />
+
 <!-- Taiwan 台湾 -->
 
     <apn carrier="中国电信彩信 (China Telecom)"

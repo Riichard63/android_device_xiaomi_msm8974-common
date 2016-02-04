@@ -65,7 +65,9 @@ PRODUCT_PACKAGES += \
 
 
 PRODUCT_PACKAGES += \
-    libinit_cancro
+    libinit_cancro \
+    sensors.native \
+    sensors.msm8974.so
 
 
 # Init
@@ -290,7 +292,8 @@ PRODUCT_PACKAGES += \
     curl \
     libnl_2 \
     libbson \
-    libcnefeatureconfig
+    libcnefeatureconfig \
+    telresources
 
 #IPTABLES
 PRODUCT_PACKAGES += \
@@ -317,7 +320,7 @@ PRODUCT_PACKAGES += \
     ExactCalculator
 
 PRODUCT_PACKAGES += \
-    AudioFX
+    MusicFX
 
 # CodeAurora
 PRODUCT_PACKAGES += \
@@ -496,10 +499,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.fuse_sdcard=true
 
 # call dalvik heap config
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
 # call hwui memory config
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # This is the aries-specific audio package
 $(call inherit-product, frameworks/base/data/sounds/AudioPackage10.mk)
+$(call inherit-product, hardware/libhardware/modules/sensors/Android.mk)

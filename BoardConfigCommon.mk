@@ -4,6 +4,8 @@ BOARD_VENDOR := xiaomi
 
 COMMON_PATH := device/xiaomi/msm8974-common
 
+OUT := out/target/product/cancro
+
 TARGET_BOARD_KERNEL_HEADERS := $(COMMON_PATH)/kernel-headers
 
 
@@ -38,7 +40,7 @@ BOARD_KERNEL_CMDLINE := ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=3
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_DTBTOOL_ARGS 	 := -2
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000 --dt $(OUT)/dt.img 
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 

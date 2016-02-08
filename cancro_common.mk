@@ -23,6 +23,8 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.x
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/spn-conf.xml:system/etc/spn-conf.xml
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/sidnid-conf.xml:system/etc/sidnid-conf.xml
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/audio_effects.conf:system/vendor/etc/audio_effects.conf
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf
+
 
 # Default Audio
 PRODUCT_PROPERTY_OVERRIDES += \

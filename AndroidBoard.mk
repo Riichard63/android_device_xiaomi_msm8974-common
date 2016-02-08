@@ -27,16 +27,16 @@
      KERNEL_DEFCONFIG := cyanogen_cancro_defconfig
  endif
  endif
-# 
+ 
  include kernel/AndroidKernel.mk
-# 
-# $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
-# 	$(transform-prebuilt-to-target)
+ 
+ $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
+ 	$(transform-prebuilt-to-target)
 # 
 # #----------------------------------------------------------------------
 # # extra images
 # #----------------------------------------------------------------------
- include build/core/generate_extra_images.mk
-# 
+ include vendor/qcom/build/tasks/generate_extra_images.mk
+
 # # include the non-open-source counterpart to this file
 -include vendor/xiaomi/cancro/AndroidBoardVendor.mk

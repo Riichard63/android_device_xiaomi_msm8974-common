@@ -417,7 +417,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.video=true \
     audio.offload.gapless.enabled=false \
     audio.offload.disable=0 \
-    use.voice.path.for.pcm.voip=true
+    use.voice.path.for.pcm.voip=true \
+    persist.audio.dirac.speaker = true
 
 # Enable AAC 5.1 output
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -505,5 +506,5 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalv
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # This is the aries-specific audio package
-$(call inherit-product, frameworks/base/data/sounds/AudioPackage10.mk)
+$(call inherit-product, frameworks/base/data/sounds/AllAudio.mk)
 $(call inherit-product, hardware/libhardware/modules/sensors/Android.mk)

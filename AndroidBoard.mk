@@ -32,6 +32,8 @@
  
  $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
  	$(transform-prebuilt-to-target)
+ INSTALLED_KERNEL_TARGET := out/target/product/cancro/obj/KERNEL_OBJ/arch/arm/boot/zImage
+
 # 
 # #----------------------------------------------------------------------
 # # extra images

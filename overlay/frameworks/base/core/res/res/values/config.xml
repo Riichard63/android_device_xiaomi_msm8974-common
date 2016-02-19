@@ -298,7 +298,7 @@
     <bool name="useImsAlwaysForEmergencyCall">false</bool>
     
     <!-- enable doze powersaving mode -->
-    <bool name="config_enableAutoPowerModes">true</bool>
+    <bool name="config_enableAutoPowerModes">false</bool>
 
     <!-- Whether cpu boost is enabled for AppLaunch -->
     <bool name="config_enableCpuBoostForAppLaunch">true</bool>

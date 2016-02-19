@@ -317,7 +317,8 @@ PRODUCT_PACKAGES += \
     Updater \
     messaging \
     SnapdragonCamera \
-    ExactCalculator
+    ExactCalculator \
+    Snap
 
 PRODUCT_PACKAGES += \
     MusicFX

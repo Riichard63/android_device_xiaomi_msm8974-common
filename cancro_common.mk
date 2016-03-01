@@ -44,6 +44,8 @@ PRODUCT_COPY_FILES += \
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, vendor/du/config/common_full_phone.mk)
+
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_BRAND := Xiaomi

@@ -20,25 +20,21 @@
 # #----------------------------------------------------------------------
 # # Compile Linux Kernel
 # #----------------------------------------------------------------------
- ifeq ($(KERNEL_DEFCONFIG),)
- ifeq ($(TARGET_BUILD_VARIANT),eng)
-     KERNEL_DEFCONFIG := cyanogen_cancro_defconfig
- else
-     KERNEL_DEFCONFIG := cyanogen_cancro_defconfig
- endif
- endif
  
  include kernel/AndroidKernel.mk
  
  $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
  	$(transform-prebuilt-to-target)
- INSTALLED_KERNEL_TARGET := out/target/product/cancro/obj/KERNEL_OBJ/arch/arm/boot/zImage
+# INSTALLED_KERNEL_TARGET := out/target/product/cancro/obj/KERNEL_OBJ/arch/arm/boot/zImage
 
 # 
 # #----------------------------------------------------------------------
 # # extra images
 # #----------------------------------------------------------------------
- include vendor/qcom/build/tasks/generate_extra_images.mk
 
 # # include the non-open-source counterpart to this file
 -include vendor/xiaomi/cancro/AndroidBoardVendor.mk
+
+TARGET_KERNEL_SOURCE:= kernel/
+
+

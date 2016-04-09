@@ -63,28 +63,28 @@ const char *mixer_paths_prefix = "/system/etc/";
 const char *def_mixer_paths = "mixer_paths.xml";
 const char *def_mixer_paths_aux = "mixer_paths_auxpcm.xml";
 
-static int read_file2(const char *fname, char *data, int max_size)
-{
-    int fd, rc;
-
-    if (max_size < 1)
-        return 0;
-
-    fd = open(fname, O_RDONLY);
-    if (fd < 0) {
-        ERROR("failed to open '%s'\n", fname);
-        return 0;
-    }
-
-    rc = read(fd, data, max_size - 1);
-    if ((rc > 0) && (rc < max_size))
-        data[rc] = '\0';
-    else
-        data[0] = '\0';
-    close(fd);
-
-    return 1;
-}
+//int read_file2(const char *fname, char *data, int max_size)
+//{
+//    int fd, rc;
+//
+//    if (max_size < 1)
+//        return 0;
+//
+//    fd = open(fname, O_RDONLY);
+//    if (fd < 0) {
+//        ERROR("failed to open '%s'\n", fname);
+//        return 0;
+//    }
+//
+//    rc = read(fd, data, max_size - 1);
+//    if ((rc > 0) && (rc < max_size))
+//        data[rc] = '\0';
+//    else
+//        data[0] = '\0';
+//    close(fd);
+//
+//    return 1;
+//}
 
 unsigned long get_hw_version(){
     int rc = 0;
@@ -200,7 +200,8 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     /* set mixer paths props */
     property_set("audio.mixer_paths.config", (char*) get_mixer_paths());
     property_set("audio.mixer_paths_aux.config", (char*) get_mixer_paths_auxpcm());
-
+    property_set("ro.build.fingerprint", "Xiaomi/cancro/cancro:6.0.1/MMB29M/5.12.28:userdebug/test-keys");
+    property_set("ro.build.description", "cancro-userdebug 6.0.1 MMB29M 5.12.28 test-keys");
 
     /* get raw ID */
     rc = read_file2(RAW_ID_PATH, tmp, sizeof(tmp));
